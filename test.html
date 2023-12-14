@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Money Projects</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#" id="dashboard">Dashboard</a></li>
+      <li><a href="#" id="myApplication">My Application</a></li>
+      <li><a href="#" id="newApplication">New Application</a></li>
+    </ul>
+  </nav>
+
+  <div class="form-container" id="verificationForm" style="display: none;">
+    <form id="idVerificationForm">
+      <input type="file" id="EmiritesID" required>
+      <input type="text" id="firstName" placeholder="First Name" required>
+      <input type="text" id="lastName" placeholder="Last Name" required>
+      <select id="residenceStatus" required>
+        <!-- Options for residence status -->
+      </select>
+      <input type="number" id="emiratesIdNumber" placeholder="Emirates ID Number" required>
+      <select id="nationality" required>
+        <!-- Options for nationality -->
+      </select>
+      <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="date" id="dob" required>
+      <button type="submit" id="submitVerification">Submit</button>
+    </form>
+  </div>
+
+    <div class="form-container" id="incomeVerification" style="display: none;">
+        <form id="incomeVerificationForm">
+          <!-- General Information -->
+          <input type="text" id="companyName" placeholder="Company Name" required>
+          <input type="text" id="jobTitle" placeholder="Job Title" required>
+          <select id="employeeStatus" required>
+            <option value="full_time">Full-Time</option>
+             <option value="part_time">Part-Time</option>
+             <option value="contract">Contract</option>
+             <option value="intern">Intern</option>
+             <option value="freelancer">Freelancer</option>
+             <option value="temporary">Temporary</option>
+          </select>
+          <input type="date" id="joiningDate" required>
+      
+          <!-- Civil Status -->
+          <select id="maritalStatus" required>
+            <!-- Options for marital status -->
+          </select>
+          <input type="text" id="spouseName" placeholder="Spouse Name">
+          <input type="number" id="dependents" placeholder="Number of Dependents" required>
+      
+          <!-- Income Details -->
+          <select id="monthlyIncome" required>
+            <!-- Options for monthly income -->
+          </select>
+          <select id="monthlyExpense" required>
+            <!-- Options for monthly expense -->
+          </select>
+      
+          <!-- Beneficiary Details -->
+          <label>Beneficiary Type:</label>
+          <input type="radio" id="individualClient" name="beneficiaryType" value="individual">
+          <label for="individualClient">Individual Client</label>
+          <input type="radio" id="corporateClient" name="beneficiaryType" value="corporate">
+          <label for="corporateClient">Corporate Client</label>
+      
+          <!-- Work Contact Information -->
+          <input type="tel" id="workPhoneNumber" placeholder="Work Phone Number" required>
+          <input type="email" id="workEmail" placeholder="Work Email Address" required>
+      
+          <button type="submit" id="submitIncomeVerification">Continue</button>
+        </form>
+      </div>
+
+      <div class="form-container" id="loanDetails" style="display: none;">
+        <form id="loanDetailsForm">
+          <!-- Product Information -->
+          <select id="productAppliedFor" required>
+            <!-- Options for the product applied for -->
+          </select>
+          <select id="sleepingPeriodDuration" required>
+            <!-- Options for repayment period -->
+          </select>
+      
+          <!-- Mortgage Details -->
+          <select id="maritalStatusMortgage" required>
+            <!-- Options for marital status -->
+          </select>
+          <input type="text" id="spouseNameMortgage" placeholder="Spouse Name">
+          <input type="number" id="dependentsMortgage" placeholder="Number of Dependents" required>
+      
+          <!-- Upload Document Details -->
+          <input type="file" id="document1" required>
+          <input type="file" id="document2" required>
+      
+          <button type="submit" id="submitLoanDetails">Submit</button>
+        </form>
+      </div>
+
+      <div class="form-container" id="agreementSection" style="display: none;">
+        <form id="agreementForm">
+          <label for="signAgreement">Sign Agreement (Upload Signature)</label>
+          <input type="file" id="signAgreement" required>
+        
+          <input type="text" id="fullName" placeholder="Full Name" required>
+        
+          <select id="readAgreement" required>
+            <option value="" disabled selected>Select</option>
+            <option value="yes">Yes, I have read the agreement</option>
+            <option value="no">No, I have not read the agreement</option>
+          </select>
+        
+          <select id="paymentMethod" required>
+            <!-- Options for payment method -->
+          </select>
+
+          <button id="addNewCardButton">Add New Card</button>
+
+          <div id="cardDetails" style="display: none;">
+              <input type="text" id="cardHolderName" placeholder="Cardholder's Name">
+              <input type="text" id="cardNumber" placeholder="Card Number">
+              <input type="text" id="expiryDate" placeholder="Expiry Date (MM/YY)">
+              <input type="text" id="cvv" placeholder="CVV">
+          </div>
+        
+          <button type="submit" id="submitAgreement">Submit</button>
+        </form>
+      </div>
+
+
+  </div>
+
+  <script>
+
+
+        // Get form elements
+        const verificationForm = document.getElementById('verificationForm');
+        const newApplicationLink = document.getElementById('newApplication');
+
+        // Display the verification form when clicking on "New Application"
+        newApplicationLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          verificationForm.style.display = 'block';
+        });
+
+        // Handle ID verification form submission
+        const idVerificationForm = document.getElementById('idVerificationForm');
+        idVerificationForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          // validation logic
+          
+          // Fetch form input values
+          const EmiritesID = document.getElementById('EmiritesID').value;
+          const firstName = document.getElementById('firstName').value;
+          const lastName = document.getElementById('lastName').value;
+          const residenceStatus = document.getElementById('residenceStatus').value;
+          const emiratesIdNumber = document.getElementById('emiratesIdNumber').value;
+          const nationality = document.getElementById('nationality').value;
+          const phoneNumberInput = document.getElementById('phoneNumber').value;
+          const email = document.getElementById('email').value;
+          const dobInput = document.getElementById('dob').value;
+      
+          // Basic validation
+          if (!EmiritesID || !firstName || !lastName || !residenceStatus || !emiratesIdNumber || !nationality || !phoneNumber || !dob) {
+            alert('Please fill in all the required fields.');
+            return;
+          }
+          
+          // Emirites ID Document Varification
+          const selectedFile = EmiritesID.files[0];
+          const validImageTypes = ['image/svg+xml', 'image/png', 'image/jpeg', 'image/gif'];
+          if (!validImageTypes.includes(selectedFile.type)) {
+            alert('Please select a file of type SVG, PNG, JPG, or GIF.');
+            return;
+          }
+          // Emirites ID Document Varification to check the dimensions
+          const eId = new Image();
+          eId.src = URL.createObjectURL(selectedFile);
+
+          // When the Emirites ID Document is loaded, check the dimensions
+          eId.onload = function() {
+            const maxWidth = 800;
+            const maxHeight = 400;
+          
+            if (eId.width > maxWidth || eId.height > maxHeight) {
+              alert('Please select an image with maximum dimensions of 800x400 pixels.');
+              return;
+            }
+
+
+          // Validate Date of Birth
+          const currentDate = new Date(); // Get the current date
+          const enteredDate = new Date(dob); // Parse the entered date
+
+          // Check if the entered date is a valid date
+          if (isNaN(enteredDate.getTime())) {
+            alert('Please enter a valid date of birth.');
+            return;
+          }
+        
+          // Check if the user is at least 18 years old (adjust the age limit as needed)
+          const eighteenYearsAgo = new Date();
+          eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+        
+          if (enteredDate > currentDate || enteredDate > eighteenYearsAgo) {
+            alert('You must be at least 18 years old.');
+            return;
+          }
+
+          // Validate email format
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+          }
+      
+          // Validate phone number format
+          const phoneRegex = /^\d{10}$/;
+          if (!phoneRegex.test(phoneNumberInput)) {
+            alert('Please enter a valid 10-digit phone number.');
+            return;
+          }
+      
+          // If all validations pass, move to income validation step
+          verificationForm.style.display = 'none';
+          incomeValidation.style.display = 'block';
+        });
+      
+        
+        ///////////////////////////////////////////////////////////
+
+        const incomeVerificationForm = document.getElementById('incomeVerificationForm');
+        const incomeVerification = document.getElementById('incomeVerification');
+
+        incomeVerificationForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+        
+          // Fetch input values from the income verification form
+          const companyName = document.getElementById('companyName').value;
+          const jobTitle = document.getElementById('jobTitle').value;
+          const employeeStatus = document.getElementById('employeeStatus').value;
+          const joiningDate = document.getElementById('joiningDate').value;
+          const maritalStatus = document.getElementById('maritalStatus').value;
+          const spouseName = document.getElementById('spouseName').value;
+          const dependents = document.getElementById('dependents').value;
+          const monthlyIncome = document.getElementById('monthlyIncome').value;
+          const monthlyExpense = document.getElementById('monthlyExpense').value;
+          const beneficiaryType = document.querySelector('input[name="beneficiaryType"]:checked');
+          const workPhoneNumber = document.getElementById('workPhoneNumber').value;
+          const workEmail = document.getElementById('workEmail').value;
+        
+          // Basic validation for income verification fields
+          if (!companyName || !jobTitle || !employeeStatus || !joiningDate || !maritalStatus || !dependents || !monthlyIncome || !monthlyExpense || !beneficiaryType || !workPhoneNumber || !workEmail) {
+            alert('Please fill in all the required fields.');
+            return;
+          }
+          
+          // Validate phone number format
+          const workphonecheck = /^\d{10}$/;
+          if (!workphonecheck.test(workPhoneNumber)) {
+            alert('Please enter a valid 10-digit phone number.');
+            return;
+          }
+
+           // Validate email format
+           const workEmailregx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+           if (!workEmailregx.test(workEmail)) {
+             alert('Please enter a valid email address.');
+             return;
+           }
+
+           
+          // If all validations pass, you can perform further actions here
+          // For demonstration, let's hide the income verification form
+          incomeVerification.style.display = 'none';
+      
+          // Further logic for processing income verification or moving to the next step
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////////////
+
+
+        // Handle submission of loan details form
+        const loanDetailsForm = document.getElementById('loanDetailsForm');
+        const loanDetails = document.getElementById('loanDetails');
+
+        loanDetailsForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+        
+          // Fetch input values from the loan details form
+          const productAppliedFor = document.getElementById('productAppliedFor').value;
+          const sleepingPeriodDuration = document.getElementById('sleepingPeriodDuration').value;
+          const maritalStatusMortgage = document.getElementById('maritalStatusMortgage').value;
+          const spouseNameMortgage = document.getElementById('spouseNameMortgage').value;
+          const dependentsMortgage = document.getElementById('dependentsMortgage').value;
+          const document1 = document.getElementById('document1').value;
+          const document2 = document.getElementById('document2').value;
+        
+          // Basic validation for loan details fields
+          if (!productAppliedFor || !repaymentPeriod || !maritalStatusMortgage || !dependentsMortgage || !document1 || !document2) {
+            alert('Please fill in all the required fields.');
+            return;
+          }
+
+          // 2 Document Varification
+          const doc1 = document1.files[0];
+          const doc2 = document1.files[0];
+          const validImageTypes = ['image/svg+xml', 'image/png', 'image/jpeg', 'image/gif'];
+          if (!validImageTypes.includes(doc1.type) && !validImageTypes.includes(doc2.type)) {
+            alert('Please select a file of type SVG, PNG, JPG, or GIF.');
+            return;
+          }
+          // Emirites ID Document Varification to check the dimensions
+          const doc11 = new Image();
+          doc11.src = URL.createObjectURL(doc1);
+
+          // When the Emirites ID Document is loaded, check the dimensions
+          doc11.onload = function() {
+            const maxWidth = 800;
+            const maxHeight = 400;
+          
+            if (doc11.width > maxWidth || doc11.height > maxHeight) {
+              alert('Please select an image with maximum dimensions of 800x400 pixels.');
+              return;
+            }
+          doc22.onload = function() {
+            const maxWidth = 800;
+            const maxHeight = 400;
+          
+            if (doc22.width > maxWidth || doc22.height > maxHeight) {
+              alert('Please select an image with maximum dimensions of 800x400 pixels.');
+              return;
+            }
+        
+          // If all validations pass, you can perform further actions here
+          // For demonstration, let's hide the loan details form
+          loanDetails.style.display = 'none';
+        
+          // Further logic for processing loan details or moving to the next step
+        });
+
+        //////////////////////////////////////////////////////////////////////
+
+        // Handle submission of agreement form
+        const agreementForm = document.getElementById('agreementForm');
+        const agreementSection = document.getElementById('agreementSection');
+
+        agreementForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+        
+          // Fetch input values from the agreement form
+          const signAgreement = document.getElementById('signAgreement').value;
+          const fullName = document.getElementById('fullName').value;
+          const readAgreement = document.getElementById('readAgreement').value;
+          const paymentMethod = document.getElementById('paymentMethod').value;
+        
+          // Basic validation for agreement section fields
+          if (!signAgreement || !fullName || readAgreement === "" || !paymentMethod) {
+            alert('Please fill in all the required fields.');
+            return;
+          }
+        
+          if (readAgreement !== 'yes') {
+            alert('You need to confirm that you have read the agreement.');
+            return;
+          }
+        
+          // If all validations pass, you can perform further actions here
+          // For demonstration, let's hide the agreement section
+          agreementSection.style.display = 'none';
+        
+          // Further logic for processing agreement or payment details
+        });
+
+
+        const payNowButton = document.getElementById('payNowButton');
+
+        payNowButton.addEventListener('click', function(e) {
+          e.preventDefault();
+        
+          // Perform any necessary actions or validations before showing the success message
+        
+          // Display "Successfully Submitted" alert message
+          alert('Successfully Submitted');
+        });
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const cardDetails = document.getElementById('cardDetails');
+        const addNewCardButton = document.getElementById('addNewCardButton');
+        const paymentMethodSelect = document.getElementById('paymentMethod');
+
+        // Function to toggle the visibility of card details
+        function toggleCardDetailsVisibility() {
+          if (paymentMethodSelect.value === 'wallet') {
+            cardDetails.style.display = 'block';
+          } else {
+            cardDetails.style.display = 'none';
+          }
+        }
+      
+        // Event listener for Add New Card button click
+        addNewCardButton.addEventListener('click', function() {
+          // Toggle visibility of card details when the button is clicked
+          toggleCardDetailsVisibility();
+        });
+      
+        // Event listener for payment method change
+        paymentMethodSelect.addEventListener('change', function() {
+          toggleCardDetailsVisibility();
+        });
+      
+        // Initially, call the function to set the initial visibility of card details based on the default selected option
+        toggleCardDetailsVisibility();
+      
+        const cardHolderName = document.getElementById('cardHolderName').value.trim();
+        const cardNumber = document.getElementById('cardNumber').value.trim();
+        const expiryDate = document.getElementById('expiryDate').value.trim();
+        const cvv = document.getElementById('cvv').value.trim();
+
+        // Cardholder's Name validation: Check if it's empty
+        if (cardHolderName === '') {
+          alert('Please enter Cardholder\'s Name.');
+          return false;
+        }
+      
+        // Card Number validation: Check if it's empty and contains only digits
+        if (cardNumber === '') {
+          alert('Please enter Card Number.');
+          return false;
+        }
+        if (!/^\d+$/.test(cardNumber)) {
+          alert('Card Number should contain only digits.');
+          return false;
+        }
+      
+        // Expiry Date validation: Check if it's empty and matches the MM/YY format
+        if (expiryDate === '') {
+          alert('Please enter Expiry Date.');
+          return false;
+        }
+        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate)) {
+          alert('Expiry Date should be in MM/YY format.');
+          return false;
+        }
+      
+        // CVV validation: Check if it's empty and contains only digits
+        if (cvv === '') {
+          alert('Please enter CVV.');
+          return false;
+        }
+        if (!/^\d{3,4}$/.test(cvv)) {
+          alert('CVV should be a 3 or 4 digit number.');
+          return false;
+        }
+      
+        // All validations passed
+        return true;
+      
+
+      // Example usage: Perform validation on form submission
+      const submitButton = document.getElementById('submitAgreement'); // Change this ID as per your submit button
+      submitButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+      
+        // Call the function to validate card details
+        const isCardValid = validateCardDetails();
+      
+        // If card details are valid, continue with form submission or further actions
+        if (isCardValid) {
+          // Perform further actions here (e.g., submit form, process data, etc.)
+          alert('Card details are valid. Proceed with the submission.');
+        }
+      });
+      
+  </script>
+
+</body>
+</html>
