@@ -4,10 +4,9 @@
 Provides a form for users to submit ID verification details including Eid document upload, personal information, and contact details.
 ### validation logic
 #### Validates mandatory fields and phone number not email
-if (!EmiritesID || !firstName || !lastName || !residenceStatus || !emiratesIdNumber || !nationality || !phoneNumber || !dob) {
-            alert('Please fill in all the required fields.');
-            return;
-          }
+
+https://github.com/ihsan292292/NurtureSparkZoho/blob/cc23121eec45a1b6d4177ab1f2b85f19bc384a37/test.html#L170C10-L173C12
+
 #### Emirites ID Document Varification (svg,png,jpeg,gif)allowed
 
 ## Income Validation
