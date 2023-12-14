@@ -16,8 +16,16 @@ https://github.com/ihsan292292/NurtureSparkZoho/blob/053f81f06b75f7ffe1a081b2b0c
 https://github.com/ihsan292292/NurtureSparkZoho/blob/053f81f06b75f7ffe1a081b2b0ceaed9ca1fb1c9/test.html#L182C11-L194C14
 
 #### Validate Date of Birth
+
 https://github.com/ihsan292292/NurtureSparkZoho/blob/053f81f06b75f7ffe1a081b2b0ceaed9ca1fb1c9/test.html#L197C11-L205C12
 
+#### validate email 
+
+https://github.com/ihsan292292/NurtureSparkZoho/blob/053f81f06b75f7ffe1a081b2b0ceaed9ca1fb1c9/test.html#L216C11-L221C12
+
+#### validate phone 
+
+https://github.com/ihsan292292/NurtureSparkZoho/blob/053f81f06b75f7ffe1a081b2b0ceaed9ca1fb1c9/test.html#L223C11-L228C12
 
 ## Income Validation
 Requires input regarding employment details, income, expenses, and beneficiary information.
